@@ -631,3 +631,90 @@ Safe way to bring in variable: string
 - string is always valid
 
 If you don't know int/float, use float.
+
+
+## #5 - Arithmetic Operators
+
+### Operators vs. Operands
+
+Arithmetic Operators: used on floats and ints
+- +
+- -
+- *
+- /
+- ++
+- --
+
+Arithmetic Operands: The values on left/right side of operator
+
+
+### Addition / Subtraction (+, -)
+
+``` cpp
+int main() {
+    const x = 8;
+    const y = 9;
+    const sum = x + y // x - y;
+    std::cout << sum;
+}
+```
+
+Addition and Subtraction are very easy.
+
+### Division (/)
+
+8/9 = 0. Why?
+- left operand is int
+- right operand is int
+    - result is going to be an int! (even if result is float)
+
+What happens if 1 operand is a float?
+- you will get a float
+
+Why? A float has a higher degree of precision!
+
+
+### Multiplication (*)
+
+This behaves as you would expect.
+- need float operands to get a float result
+
+### Compound Assignment Operators
+
+These are the same:
+
+``` cpp
+int x = 2;
+x = x + 2
+x += 2
+```
+
+Increment/Decrement:
+
+``` cpp
+int x = 0;
+x++;
+x--;
+```
+
+### Order of Operations
+
+BEDMAS
+- B: Brackets
+- E: Exponents
+- D: Division
+- M: Multiplication
+- A: Addition
+- S: Subtraction
+1. 
+
+### Modulus Operator (%)
+
+Modulus: Gives you the remainder from division
+
+Example: 
+- 10/4 = 2.5
+- 10 % 4 = 2
+    - 4 goes into 10 twice (8), need 2 more to get back up to 10
+
+Note: Use integers for the modulus
