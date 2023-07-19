@@ -422,7 +422,38 @@ std::string x;
 Run the code:
 
 ``` cpp
+#include <iostream>
+#include <string>
 
+int main() {
+    std::cout << "Start of main." << std::endl;
+
+    int val = 2.7;
+    // c++ tries to convert this to an int (2 since decimal is chopped off)
+    // if it cannot, error is thrown
+    std::cout << val << std::endl;
+
+    // init a var
+    int x, y;
+    x = 7;
+    y = 9;
+    x = 69;
+    std::cout << x << " " << y << std::endl;
+    x = y;
+    std::cout << x << std::endl;
+
+    //redefining a type
+    // int x2; cannot do this...
+    std::string x2;
+    x2 = "Myles!!!";
+    std::cout << x2 << std::endl;
+}
+
+// int 7, -9
+// float 7.0, -9.8
+// bool true, false
+// string ""
+// char 'x' '0'
 ```
 
 Note: C++ is a statically typed language, i.e. types can not change.
@@ -431,3 +462,172 @@ Steps:
 - Open cmd via file explorer cmd
 - g++ -o runProgram tutorial3.cpp
 - runProgram
+
+
+## #4 - User Input and Constants
+
+### Intro
+
+How to get console input from the user:
+
+### Constant Variables
+
+First thing: Constant variables
+- constant = it does not change
+
+``` cpp
+const int gravity = -9.8; // This variable cannot be changed (will throw an error)
+```
+
+Good practice: Use const whenever you can
+
+
+### User Input
+
+Starting to get user input: std::cin
+
+``` cpp
+
+```
+
+If you run this...
+- Open cmd via file explorer cmd
+- g++ -o runProgram tutorial4.cpp
+- runProgram
+
+Cursor flashing  = Waiting for user input!
+
+What happens if you are expecting a type (int) and get a string:
+- error flag is thrown
+- cin ends
+    - "we need to resolve this error before taking in any more input!" 
+
+Example:
+
+``` cpp
+#include <iostream>
+int main() {
+    int a, b;
+
+    std::cin >> a;
+    std::cin >> b;
+
+    std::cout << a << endl;
+    std::cout << b << endl;
+}
+```
+
+If you enter the following for a/b:
+- a: 3
+- b: h
+You will get the following returned:
+- a: 3
+- b: 0
+
+Why the 3?
+- it worked
+
+Why the 0?
+- error
+
+
+### cin Errors
+
+Similar to the past example, let's say we got an error on the 1st one this time:
+
+If you enter the following for a/b:
+- a: b
+- b: n/a (did not get a chance to since it breaks)
+You will get the following returned:
+- a: 0
+- b: 183385857
+
+Why the 0?
+- error
+
+Why the random value?
+- at this point in time, b is holding onto a random variable 
+    - it has a location of memory on the computer
+        - we have not set the value of x, so we are getting back its place in memory
+
+
+### cin Errors Fix
+
+How to check for invalid input:
+
+``` cpp
+int main() {
+    int n, x;
+    std::cin >> n;
+    std::cout << std::cin.fail(); // 1 for fail, 0 for all good
+}
+```
+
+How to clear the error:
+
+What cin.clear() does:
+- clears input from console input stream
+- removes error flag from console input stream
+    - you still get the same error
+    - it does not remove the text that was typed in the string
+
+Remove the text (to prevent the error from inevitably happening again!)
+
+What cin.ignore() does:
+- clears a certain amount of characters from the input stream
+
+Note: make sure the 2nd arg is a char ie. single quotation marks around the \n
+
+``` cpp
+int main() {
+    int n, x;
+    std::cin >> n;
+    std::cout << n << std::endl;
+
+    std::cin.clear();
+    std::cin.ignore(1000, '\n'); // clear 1000 characters from input stream (make sure to use single quotation marks for argument #2, it is a char)
+    std::cin >> x;
+    std::cout << x << std::endl;
+}
+```
+
+Advice: Clear the errors because if no error, it just doesn't do anything.
+
+### Building a Simple Calculator
+
+Simple Calculator:
+
+``` cpp
+#include <iostream>
+#include <string>
+
+int main() {
+    int num1, num2;
+    std::cout << "Enter a number: ";
+    std::cin >> num1;
+
+    // Handle error
+    std::cin.clear();
+    std::cin.ignore(1000, '\n'); // errors become 0
+
+    std::cout << "Enter a 2nd number: ";
+    std::cin >> num2;
+
+    const int sum = num1 + num2;
+    std::cout << "The sum is: " << sum << std::endl;
+
+    return 0;
+}
+```
+
+Steps:
+- Open cmd from file explorer
+- g++ -o runProgram tutorial4.cpp
+- runProgram
+
+### Takeaways
+
+Safe way to bring in variable: string
+- string is always valid
+
+If you don't know int/float, use float.
