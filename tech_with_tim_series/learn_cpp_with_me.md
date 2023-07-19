@@ -133,7 +133,6 @@ Note: You get no output in cmd, but if you look in your directory
 
 Run the Program
 - runProgram
-- ./runProgram
 
 ### Re-Compiling your Code
 
@@ -151,5 +150,16 @@ cout << "I added 1 more line of code for the output.";
 - Add this to line 7 and make sure to press save after
 
 Re-compile the code
-- Same line of code as above: 
+- Same line of code as above: g++ -o runProgram tutorial1.cpp
     - get to this by cycling up in cmd with the up arrow
+
+Run the code
+- runProgram
+
+### Finishing up the video
+
+Reflect changes on Github:
+- Open VSCode Terminal to 'cpp' folder
+- git add .
+- git commit -m "Completed Video #1 in the Series"
+- git push
