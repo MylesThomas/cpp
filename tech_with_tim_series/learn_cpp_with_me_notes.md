@@ -706,7 +706,7 @@ BEDMAS
 - M: Multiplication
 - A: Addition
 - S: Subtraction
-1. 
+
 
 ### Modulus Operator (%)
 
@@ -718,3 +718,191 @@ Example:
     - 4 goes into 10 twice (8), need 2 more to get back up to 10
 
 Note: Use integers for the modulus
+
+``` cpp
+#include <iostream>
+
+int main() {
+    const int a_int = 10;
+    const int b_int = 3;
+    int answer_int = a_int / b_int;
+    std::cout << "Answer (int): " << answer_int << std::endl;
+
+    const float a_float = 10.0;
+    const float b_float = 3.0;
+    float answer_float = a_float / b_float;
+    std::cout << "Answer (float): " << answer_float << std::endl;
+
+    return 0;
+}
+```
+- Open cmd from file explorer
+- Compile: g++ -o runProgram tutorial5.cpp
+- Run: runProgram
+
+
+## #6 - Comparison Operators
+
+### Intro
+
+Setup
+- Create folder '6'
+- Create file 'tutorial6.cpp'
+
+``` cpp
+#include <iostream>
+#include <string>
+
+int main() {
+    // 
+    return 0;
+}
+```
+
+- Open cmd via file explorer
+- g++ -o runProgram tutorial6.cpp
+- runProgram
+
+### Boolean Values
+
+Last video: Arithmetic
+
+This video: Comparison
+- > and >= 
+- < and <=
+- !-
+- ==
+(this order means nothing)
+
+Expression: Uses a comparison operator
+- returns boolean
+
+``` cpp
+#include <iostream>
+#include <string>
+
+int main() {
+    bool test = 1 < 2;
+    std::cout << test << std::endl; // 1 = true
+    return 0;
+}
+```
+
+
+### Comparison Operator Examples
+
+Strings/Chars: evaluated Lexicographical ordering
+- results are not as intuitive
+
+Make sure to know the difference between `=` and `==`:
+- =: assignment operator
+- ==: equivalence/comparison
+    - !=: not equal to comparison
+
+
+### Comparing Characters
+
+Characters: 1 single character around '' ie. 'a' and 'A'
+
+``` cpp
+int main() {
+    bool test = 'a' < 'A';
+    std::cout << test << std::endl; // 0 = false
+
+    std::cout <<  << std::endl; // 97 
+    std::cout << test << std::endl; // 65 
+}
+```
+
+Quick Lesson on typecasting in C++:
+
+``` cpp
+#include <iostream>
+int main () 
+{
+    char ch = 'A';
+    std::cout << int(ch) << std::endl;
+
+    std::cout << int(ch) - 48 << "\n"; // 
+    std::cout << int(ch) - '0' << "\n"; // 
+
+    return 0;
+}
+```
+
+Output: 65
+
+``` cpp
+// Driver code
+int main()
+{
+    char ch = '5';
+ 
+    // Subtracting 48 will produce desired results
+    cout << int(ch) - 48 << "\n"; // 
+ 
+    // Also subtracting '0' will result in same output
+    cout << int(ch - '0'); // 
+    return 0;
+}
+```
+
+More on ASCII:
+- int('A'): 65
+- int('B'): 66
+...
+- int('a'): 97
+- int('b'): 98
+ 
+
+
+### Comparing Strings
+
+Strings: any # of characters around "" ie. "Myles Thomas" or "       " or ""
+
+``` cpp
+#include <iostream>
+int main () 
+{
+    bool test = "hello" != "HELLO       ";
+    std::cout << test << std::endl;
+}
+```
+
+### Realistic Example
+
+``` cpp
+#include <iostream>
+int main () 
+{
+    int num1, num2;
+    std::cout << "Type number 1: " << std::endl;
+    std::cin >> num1;
+    std::cout << "Type number 2: " << std::endl;
+    std::cin >> num2;
+
+    std::cout << "There two numbers are the same: " << (num1==num2) << std::endl;
+}
+```
+
+
+## #7 - Logical Operators (And, Or and Not)
+
+### Setup
+
+Leave open the cmd from last time and do the following:
+- cd ..
+- mkdir 7
+- cd 7
+- echo int main() {} > tutorial7.cpp
+
+### Logical Operators
+
+3 logical operators:
+- NOT (!): Negates a boolean value
+- AND (&&): AND
+- OR (||): OR
+
+Compiling code example: 
+- g++ -o runProgram tutorial7.cpp
+- runProgram
