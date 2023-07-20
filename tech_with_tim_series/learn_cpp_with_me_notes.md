@@ -906,3 +906,22 @@ Leave open the cmd from last time and do the following:
 Compiling code example: 
 - g++ -o runProgram tutorial7.cpp
 - runProgram
+
+
+## #8 - If, Else, & Else If
+
+### Setup
+
+Leave open the cmd from last time and do the following:
+- cd ..
+- mkdir 8
+- cd 8
+- echo int main() {} > tutorial8.cpp
+
+### If Statements
+
+Condition: Anything that evaluates true OR false
+
+Compiling code example:
+- g++ -o runProgram tutorial8.cpp
+- runProgram
