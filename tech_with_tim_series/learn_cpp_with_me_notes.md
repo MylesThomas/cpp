@@ -925,3 +925,100 @@ Condition: Anything that evaluates true OR false
 Compiling code example:
 - g++ -o runProgram tutorial8.cpp
 - runProgram
+
+
+## #9 - Arrays
+
+Arrays: Way to store elements
+
+### Array vs. List
+
+List is NOT an array!
+- array: {1, 2, 3}
+    - all elements are the same data type
+    - ordered
+    - can change values in the array
+    - can NOT change the length/size of the array
+        - to increase size of array, you need to create a new one
+
+- list: 
+
+### Creating Arrays
+
+What to do when creating an array:
+- data type
+- size/length
+- name of variable
+
+``` cpp
+int main() {
+    int x = 5;
+    float arr[x] = {1,2,3,4,5};
+    std::cout << arr; // slkdkaljklk
+
+    //float arr[] {1,2,3,4,5}; this works too
+    //float arr[5]; need to pick size if you don't give the values right away
+}
+```
+
+Why is it that when we print out `arr` we get that weird output?
+- we are getting the memory location on my computer
+
+### Indices and Accessing Array Elements
+
+Indices/indexes: Position of the error
+- 0 index
+- last element: always is arr.size() - 1
+
+``` cpp
+int x = 5;
+int arr[5] = {2,3,4,5,6};
+arr[0] = 10;
+std::cout << arr[0]; // 10
+```
+
+
+### Default Array Initialization
+
+When you do not define what is being stored in a container/memory location, you are just going to get a random gibberish
+- this is what is stored at memory here
+
+### Array Errors
+
+What happens when you try and access an index that does not exist?
+- once again, you get some gibberish
+
+``` cpp
+int arr[5] = {2,3,4,5,6};
+std::cout << arr[88] << std::endl; // gibberish
+```
+
+### Different Types of Arrays
+
+``` cpp
+string arr2[] {"myles", "thomas"};
+```
+
+### Size of Arrays
+
+Other languages:
+- .size
+- .length
+- len()
+
+C++
+- 2 parts:
+    - sizeof(arr): Gives how many bytes are being taken up by the array
+    - sizeof(arr[0]): # of bytes 1 value in the array takes up
+
+``` cpp
+// size
+sizeof(arr) / sizeof(arr[0]);
+```
+
+Example: Array takes up 16 bytes, each int takes up 4 bytes
+- 16 / 4 = length = 4! 
+
+Compiling:
+- g++ -o runProgram tutorial9.cpp
+- runProgram
