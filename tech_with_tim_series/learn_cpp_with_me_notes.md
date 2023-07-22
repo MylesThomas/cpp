@@ -1022,3 +1022,10 @@ Example: Array takes up 16 bytes, each int takes up 4 bytes
 Compiling:
 - g++ -o runProgram tutorial9.cpp
 - runProgram
+
+
+## #10 - For Loops
+
+### Intro
+
+Before, if we wanted to repeat something, we had to write 
