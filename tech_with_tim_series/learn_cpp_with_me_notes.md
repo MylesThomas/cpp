@@ -931,6 +931,10 @@ Compiling code example:
 
 Arrays: Way to store elements
 
+### Setup
+
+
+
 ### Array vs. List
 
 List is NOT an array!
@@ -1026,6 +1030,99 @@ Compiling:
 
 ## #10 - For Loops
 
+### Setup
+
+Leave open the cmd from last time and do the following:
+- cd ..
+- mkdir 10
+- cd 10
+- echo int main() {} > tutorial10.cpp
+
 ### Intro
 
-Before, if we wanted to repeat something, we had to write 
+Before, if we wanted to repeat something, we had to write
+- for when you know the number of iterations beforehand
+
+Note: While Loops are for when you do NOT know the number of iterations beforehand
+
+Iteration = 1 step of the loop
+
+``` cpp
+// 3 criteria for for-loop:
+//
+// 1. define iterator value (usually = 0)
+// 2. ending condition
+// 3. increment value (i++ or ++i for OG's)
+#include <iostream>
+#include <string>
+
+int main() {
+    for (int i = 0; i < 10; i++) { // ++i is preferred
+        // 
+        std::cout << i << std::endl;
+
+        if (i % 2 == 0) {
+            std::cout << "Even number!" << std::endl;
+        }
+    }
+}
+```
+
+Infinite loop:
+
+``` cpp
+for (int i = 0; i < 10; i = 0)
+for (int i = -5; i != -6; i = 0)
+```
+
+Counting down:
+
+``` cpp
+for (int i = 10; i > 11; i-=5) // doesn't do any iterations
+```
+
+
+### Iterating Through Arrays
+
+``` cpp
+#include <iostream>
+#include <string>
+
+int main() {
+    int x [] = {5, 6, 7, 8, 9, 10, 20, 30, 40};
+
+    // use i to access indices of the array
+    for (int i = 0; i < sizeof(x) / sizeof(x[0]); i++) {
+        std::cout << x[i] << std::endl;
+    }
+}
+```
+
+### Initializing an array
+
+``` cpp
+#include <iostream>
+#include <string>
+
+int main() {
+    int x [5];
+
+    // fill array with elements
+    for (int i = 0; i < sizeof(x) / sizeof(x[0]); i++) {
+        x[i] = i;
+    }
+    // print to console
+    for (int i = 0; i < sizeof(x) / sizeof(x[0]); i++) {
+        std::cout << x[i] << std::endl;
+    }
+}
+```
+
+Compile steps:
+- g++ -o runProgram tutorial10.cpp
+- runProgram
+
+Push to Git:
+- git add .
+- git commit -m "Completed Lesson 10 of Tech With's Tim C++ Series"
+- git push -u origin main
