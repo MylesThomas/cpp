@@ -1126,3 +1126,94 @@ Push to Git:
 - git add .
 - git commit -m "Completed Lesson 10 of Tech With's Tim C++ Series"
 - git push -u origin main
+
+
+## #11 - While, Do While Loops & Break/Continue
+
+
+### Setup
+
+```sh
+cd ..
+mkdir 11
+cd 11
+echo int main() {} > tutorial10.cpp
+```
+
+### While Loops vs. For Loops / While Loop Syntax
+
+While loops: More powerful than for loops
+- anything a for loop can do, a while loop does too!
+
+While loop
+- MUCH more general
+- we won't know how much longer they will run
+    - user might keep giving invalid input
+
+For loop
+- cleaner syntax
+
+```cpp
+#include <iostream>
+#include <string>
+
+int main() {
+    // these do the same...
+    for (int i = 0; i < 10; i++) {
+        std::cout << i << std::endl;
+    }
+
+    int i = 0;
+    while (i < 10) {
+        std::cout << i << std::endl;
+        i++;
+    }
+}
+```
+
+Compiling:
+
+```sh
+g++ -o runProgram tutorial11.cpp
+runProgram
+```
+
+### While Loop Examples
+
+```cpp
+int main() {
+    int input;
+    while (input != 1 && input != 2) {
+        std::cout << "Type the number 1 or 2: ";
+        std::cin >> input;
+    }
+}
+```
+
+### Break
+
+Break: It breaks the closest loop it is inside and ends it
+- entire for loop is done 
+- we want to use this when something happens
+
+```cpp
+int main() {
+    int input = 1;
+    while (true) {
+        std::cout << "Type the number 1 or 2: " std::endl;
+        std::cin >> input;
+        if (input == 1 || input == 2) {
+            break;
+        } else if (input == 4) {
+            std::cout << "cool" std::endl;
+            break;
+        }
+        
+    }
+}
+```
+
+Note: Can be used to simplify the expression
+
+
+### Continue
