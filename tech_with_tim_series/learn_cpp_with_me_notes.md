@@ -1393,7 +1393,14 @@ What this video is: Properties of strings that we have not seen yet!
 ### String Indexing
 
 ```cpp
+#include <iostream>
+#include <string>
 
+int main() {
+    std::string str = "hello world!"; // double brackets for string
+    str[1] = 'z'; // single brackets for char
+    std::cout << str[1];
+} 
 ```
 
 ```sh
@@ -1404,13 +1411,22 @@ runProgram
 
 #### Iterating Through Strings
 
-```cpp
-
-```
-
 #### .size() and .length()
 
 ```cpp
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string str = "hello world!";
+    std::cout << str.size() << std::endl;
+    std::cout << str.length() << std::endl; // gets the same thing
+    
+    for (int i = 0; i < str.length(); i++) {
+        char chr = str[i];
+        std::cout << chr << std::endl;
+    }
+} 
 
 ```
 
@@ -1422,5 +1438,117 @@ Make sure you are using a command prompt in directory 'cpp'.
 git status
 git add .
 git commit -m "Completed Lesson 13 of Tech With's Tim C++ Series"
+git push -u origin main
+```
+
+
+## #14 - References (&)
+
+### Setup
+
+```sh
+cd ..
+mkdir 14
+cd 14
+echo int main() {} > tutorial14.cpp
+```
+
+Then, add this in at the top of the .cpp file:
+
+```cpp
+#include <iostream>
+#include <string>
+```
+
+### Intro
+
+Reference = Alias
+- another way to refer to a variable
+
+How to make a reference:
+- make a variable
+- make a reference by 
+    - if you change b, you will change a
+        - you are referring to its place in the memory
+
+### Creating References
+
+```cpp
+#include <iostream>
+#include <string>
+
+int main() {
+    int a = 2;
+    int &b = a;
+    int &c = b;
+    c = 60;
+    std::cout << a << std::endl; // 60 now
+    std::cout << b << std::endl; // 60
+    std::cout << c << std::endl; // 60
+} 
+```
+
+```sh
+# compile
+g++ -o runProgram tutorial14.cpp
+runProgram
+```
+
+What is it doing here:
+- b is referencing a
+- the computer has 2 variables that can access the same value
+
+What is the point of a reference?
+- a lot of times with functions: you don't want to know actual value, you want access to it though
+
+
+### Memory Address of Variables
+
+Idea: When you say B is pointing to A, they are pointing to the box that is storing the value 2
+- that box has a location in computer's memory/RAM
+- you can access that memory address
+    - put & before a variable to get the hexadecimal
+    - put & before a reference to get the hexadecimal
+
+```cpp
+#include <iostream>
+#include <string>
+
+int main() {
+    int a = 2;
+    int b = a;
+    int &c = a;
+
+    std::cout << &a << std::endl; // 0x61ff08
+    std::cout << &b << std::endl; // 0x61ff04 (different because accessing different place in memory)
+    std::cout << &c << std::endl; // 0x61ff08
+} 
+
+```
+
+### Reference Rules
+
+Nuances and Details:
+
+When you create reference you must initialize it:
+
+```cpp
+bool x = true; // normal
+bool y; // ok
+bool &z; // gives error
+bool &zz; // cannot init to null either
+
+string str = "hello";
+bool &str2 = str; // cannot do it, (you changed from str to bool)
+```
+
+### Git
+
+Make sure you are using a command prompt in directory 'cpp'.
+
+```sh
+git status
+git add .
+git commit -m "Completed Lesson 14 of Tech With's Tim C++ Series"
 git push -u origin main
 ```
