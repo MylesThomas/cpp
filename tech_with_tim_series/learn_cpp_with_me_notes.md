@@ -1289,7 +1289,7 @@ cd 12
 echo int main() {} > tutorial12.cpp
 ```
 
-Add this in at the top of the file:
+Then, add this in at the top of the .cpp file:
 
 ```cpp
 #include <iostream>
@@ -1363,6 +1363,64 @@ Make sure you are using a command prompt in directory 'cpp'.
 ```sh
 git status
 git add .
-git commit -m "Completed Lesson 11 of Tech With's Tim C++ Series"
+git commit -m "Completed Lesson 12 of Tech With's Tim C++ Series"
+git push -u origin main
+```
+
+
+## #13 - Strings
+
+### Setup
+
+```sh
+cd ..
+mkdir 13
+cd 13
+echo int main() {} > tutorial13.cpp
+```
+
+Then, add this in at the top of the .cpp file:
+
+```cpp
+#include <iostream>
+#include <string>
+```
+
+### Intro
+
+What this video is: Properties of strings that we have not seen yet!
+
+### String Indexing
+
+```cpp
+
+```
+
+```sh
+# compile
+g++ -o runProgram tutorial13.cpp
+runProgram
+```
+
+#### Iterating Through Strings
+
+```cpp
+
+```
+
+#### .size() and .length()
+
+```cpp
+
+```
+
+### Git
+
+Make sure you are using a command prompt in directory 'cpp'.
+
+```sh
+git status
+git add .
+git commit -m "Completed Lesson 13 of Tech With's Tim C++ Series"
 git push -u origin main
 ```
