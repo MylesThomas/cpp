@@ -1137,7 +1137,7 @@ Push to Git:
 cd ..
 mkdir 11
 cd 11
-echo int main() {} > tutorial10.cpp
+echo int main() {} > tutorial11.cpp
 ```
 
 ### While Loops vs. For Loops / While Loop Syntax
@@ -1217,3 +1217,152 @@ Note: Can be used to simplify the expression
 
 
 ### Continue
+
+Continue: Continue the loop, but break out of/skip the rest of the current iteration
+- brings you to the next step
+
+```cpp
+int main() {
+    for (int i = 0; i < 10; i++) {
+        if (i == 9 || i == 7) {
+            continue;
+        }
+        std::cout << i std::endl;
+    }
+}
+```
+
+Good practice: Use an if code and not even need the else
+- if: the thing that doesn't happen much
+- else: the norm
+
+
+### Do While Loop
+
+Do While: Make sure that it runs at least 1 time!
+
+```cpp
+#include <iostream>
+#include <string>
+
+int main() {
+    int x = 10;
+
+    do {
+        int add;
+        std::cout << "Type the number to add to x: ";
+        std::cin >> add;
+        x += add;
+        std::cout << "x is: " << x << std::endl;
+    }
+    while (x < 10);
+}
+```
+
+What this says:
+- "alright, no matter what, we are going to do this at least once"
+
+Do > Check > Do > Check
+
+(The normal has always been: Check > Do > Check)
+
+### Git
+
+Make sure you are using a command prompt in directory 'cpp'.
+
+```sh
+git status
+git add .
+git commit -m "Completed Lesson 11 of Tech With's Tim C++ Series"
+git push -u origin main
+```
+
+
+## #12 - Switch Statement
+
+### Setup
+
+```sh
+cd ..
+mkdir 12
+cd 12
+echo int main() {} > tutorial12.cpp
+```
+
+Add this in at the top of the file:
+
+```cpp
+#include <iostream>
+#include <string>
+```
+
+### Intro
+
+Switch Statement: similar to if else block
+- allows you to do it in a cleaner way
+
+### Rest of the video!
+
+What it does:
+- takes in 1 expression ie. x + y
+    - compares it to a bunch of different values
+        - you can do this in a bunch of different ways
+
+Note: Not all programming languages have compatibility for this!
+
+```cpp
+#include <iostream>
+#include <string>
+
+int main() {
+    int x = 69;
+    switch(x) {
+        std::cout << x << std::endl;
+        case 1:
+            std::cout << "x is 1";
+            break;
+        case 2:
+            std::cout << "x is 2";
+            break;
+        case 10:
+            std::cout << "x is 10";
+            break;
+
+        // default ie. 'else'
+        default:
+            std::cout << "x is not 1, 2, or 10." << std::endl;
+            std::cout << "x is actually ..." << std::endl;
+            std::cout << x;
+    }
+} 
+// x is not 1, 2, or 10.
+// x is actually ...
+// 69
+
+```
+
+```sh
+# compile
+g++ -o runProgram tutorial12.cpp
+runProgram
+```
+
+What we did here:
+- Wrote case(s)
+- Wrote code for what happens when the cases become true
+- break = terminates the given case
+
+Default: if it is not one of the cases
+- example: there is no case for 4
+    - similar to 'else' in if else
+
+### Git
+
+Make sure you are using a command prompt in directory 'cpp'.
+
+```sh
+git status
+git add .
+git commit -m "Completed Lesson 11 of Tech With's Tim C++ Series"
+git push -u origin main
+```
