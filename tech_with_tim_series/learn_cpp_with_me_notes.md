@@ -1552,3 +1552,130 @@ git add .
 git commit -m "Completed Lesson 14 of Tech With's Tim C++ Series"
 git push -u origin main
 ```
+
+
+## #15 - Pointers (*)
+
+### Setup
+
+```sh
+cd ..
+mkdir 15
+cd 15
+echo int main() {} > tutorial15.cpp
+```
+
+Then, add this in at the top of the .cpp file:
+
+```cpp
+#include <iostream>
+#include <string>
+```
+
+### Intro
+
+Pointers
+- need to know about references first
+
+### Pointers and References (Visualized)
+
+Pointer: Stores memory address location of a variable
+
+```cpp
+int x = 2;  // 
+int &y = x; // 
+int *z = x; // holds memory address location of x (0x23ab) ; has memory address of 0xabcd
+
+```
+
+Notes:
+- You can have nested pointers
+- A pointer is its own value
+
+How to de-reference a pointer: *x
+
+### Pointer Examples
+
+```cpp
+ #include <iostream>
+#include <string>
+
+int main() {
+    int x = 2;
+    int *y = &x; // get the address of x (pointer needs to point to memory address)
+
+    std::cout << &x << std::endl; // 0x61ff0c
+    std::cout << y << std::endl;  // 0x61ff0c
+    std::cout << &y << std::endl; // 0x61ff08 (memory address of pointer is different...)
+    std::cout << *y << std::endl; // 2 (de-referencing gives value associated with '0x61ff0c')
+} 
+
+```
+
+```sh
+# compile
+g++ -o runProgram tutorial15.cpp
+runProgram
+```
+
+### Pointer Rules
+
+When you create a pointer, you do not need to initialize it.
+
+```cpp
+// these are ok
+int *y; // default pointer
+int *y = NULL; 
+
+```
+
+You can change what a pointer points to:
+
+```cpp
+int x = 2;
+int w = 3;
+
+int *y = &x;
+y = &w; // valid!
+```
+
+Note: You cannot change what a reference references.
+
+### Pointer Arithmetic With Arrays
+
+Get pointer to first location in the array:
+
+```cpp
+#include <iostream>
+#include <string>
+
+int main() {
+    int x[] = {1,2,3};
+    int *head = x; // gives location to first in array
+
+    // loop through array (by changing head)
+    for (int i = 0; i < 3; i++) {
+        head = x + i;
+        std::cout << head << std::endl; // memory address
+        std::cout << *head << std::endl; // the value that the memory points to 
+        
+    }
+} 
+```
+
+Notes:
+- Array itself `x` is equal to memory address location of `x[0]`
+- Incrementing the address works because we know there are subsequent elements
+
+### Git
+
+Make sure you are using a command prompt in directory 'cpp'.
+
+```sh
+git status
+git add .
+git commit -m "Completed Lesson 15 of Tech With's Tim C++ Series"
+git push -u origin main
+```
+
+
