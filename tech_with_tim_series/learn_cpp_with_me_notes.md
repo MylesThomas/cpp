@@ -1672,10 +1672,234 @@ Notes:
 Make sure you are using a command prompt in directory 'cpp'.
 
 ```sh
+cd cpp
 git status
 git add .
 git commit -m "Completed Lesson 15 of Tech With's Tim C++ Series"
 git push -u origin main
+git status
+git log --oneline
+q
+```
+
+## #16 - Tuples
+
+### Setup
+
+```sh
+cd tech_with_tim_series
+mkdir 16
+cd 16
+echo int main() {} > tutorial16.cpp
+```
+
+Then, add this in at the top of the .cpp file:
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+```
+
+### Intro
+
+Start by including the library at the top:
+
+```cpp
+#include <tuple>
+```
+
+### What are Tuples?
+
+Tuples: Similar to an array with ordered values, but with some differences:
+- You can have multiple data types
+- Different way of accessing/changing elements
+
+```cpp
+#include <iostream>
+#include <string>
+#include <tuple>
+using namespace std;
+
+int main() {
+    tuple <int, string, char> person;
+} 
+
+```
+
+What is this:
+- A tuple with the following:
+    - value 1: int
+    - value 2: string
+    - value 3: char
+    
+You can make a tuple with 1, 2, 3000 items, it does not matter.
+
+### Creating Tuples
+
+Initializing a tuple with values:
+
+```cpp
+int main() {
+    tuple <int, string> person (20, "Tim");
+}
+```
+
+### Accessing Tuple Values
+
+You cannot use the indexing, you must use .get():
+
+```cpp
+#include <iostream>
+#include <string>
+#include <tuple>
+using namespace std;
+
+int main() {
+    tuple <int, string> person (20, "Tim");
+
+    // wrong
+    // cout << person[i] << endl;
+
+    // correct
+    cout << get<0>(person) << endl;
+    cout << get<1>(person) << endl;
+
+    // change values
+    get<0>(person) = 25;
+    get<1>(person) = "Myles";
+    
+    cout << get<0>(person) << endl;
+    cout << get<1>(person) << endl;
+}
+
+```
+
+
+### make_tuple
+
+make_tuple: Function that Takes in values, makes a tuple:
+
+```cpp
+// C++ program to  iterated thorough
+// all values. I equals number
+// of values in tuple
+#include <iostream>
+#include <string>
+#include <tuple>
+ 
+using namespace std;
+
+// Function to iterate through all values
+// I equals number of values in tuple
+template <size_t I = 0, typename... Ts>
+typename enable_if<I == sizeof...(Ts),
+                   void>::type
+printTuple(tuple<Ts...> tup)
+{
+    // If iterated through all values
+    // of tuple, then simply return.
+    return;
+}
+ 
+template <size_t I = 0, typename... Ts>
+typename enable_if<(I < sizeof...(Ts)),
+                   void>::type
+
+printTuple(tuple<Ts...> tup)
+{
+ 
+    // Print element of tuple
+    cout << get<I>(tup) << " ";
+ 
+    // Go to next element
+    printTuple<I + 1>(tup);
+}
+
+int main() {
+    tuple <int, string> person (20, "Tim");
+    get<0>(person) = 25;
+    get<1>(person) = "Myles";
+    
+    // cout << get<0>(person) << endl;
+    // cout << get<1>(person) << endl;
+
+    // make_tuple
+    tuple <int, char, bool, float> thing; // declaring that the variable exists
+    thing = make_tuple(23, 'H', true, 24.3); // initializing the tuple
+    cout << get<0>(thing) << endl;
+    cout << get<1>(thing) << endl;
+    cout << get<2>(thing) << endl;
+    cout << get<3>(thing) << endl;
+
+    // this is what happens if you do not initialize the tuple:
+    tuple <int, char, bool, float> thing2; // declaring that the variable exists
+    //thing = make_tuple(23, 'H', true, 24.3); // initializing the tuple
+    cout << get<0>(thing2) << endl; // 0
+    cout << get<1>(thing2) << endl; // 
+    cout << get<2>(thing2) << endl; // 0
+    cout << get<3>(thing2) << endl; // 0
+
+    // Another way to initialize the tuple:
+    tuple <int, char, bool, float> thing3 = make_tuple(2333, 'Z', false, 24.355665556); // initializing the tuple
+    
+    // for fun: iterate through the tuple
+    // Function call
+    printTuple(thing3);
+    return 0;
+}
+
+```
+
+
+### Swapping Tuples
+
+Swap contents of 2 tuples:
+
+```cpp
+// C++ program to  iterated thorough
+// all values. I equals number
+// of values in tuple
+#include <iostream>
+#include <string>
+#include <tuple>
+ 
+using namespace std;
+
+
+int main() {
+    tuple <int, int> t1 = make_tuple(1,2); 
+    tuple <int, int> t2 = make_tuple(3,4);
+
+    t1.swap(t2);
+
+    cout << get<0>(t1) << endl;
+    cout << get<1>(t1) << endl;
+    
+    cout << get<0>(t2) << endl;
+    cout << get<1>(t2) << endl;
+}
+
+
+```
+
+### Decomposing Tuples
+
+
+### Concatenating Tuples
+
+
+### Git
+
+```sh
+cd cpp
+git status
+git add .
+git commit -m "Completed Lesson 16 of Tech With's Tim C++ Series"
+git push -u origin main
+git status
+git log --oneline
+q
 ```
 
 
