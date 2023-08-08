@@ -1745,6 +1745,12 @@ int main() {
 }
 ```
 
+```sh
+# compile
+g++ -o runProgram tutorial16.cpp
+runProgram
+```
+
 ### Accessing Tuple Values
 
 You cannot use the indexing, you must use .get():
@@ -1879,15 +1885,83 @@ int main() {
     cout << get<0>(t2) << endl;
     cout << get<1>(t2) << endl;
 }
+```
+
+Notes:
+- you can switch order of the swap
+- types must be the same
+
+### Decomposing Tuples
+
+Decompose = Break multiple elements up into their own variables
+- tie: Takes in 2 variables, take element and assign to the variables
+
+```cpp
+// C++ program to  iterated thorough
+// all values. I equals number
+// of values in tuple
+#include <iostream>
+#include <string>
+#include <tuple>
+ 
+using namespace std;
+
+
+int main() {
+    tuple <int, int, int> t1 = make_tuple(1,2,3); 
+    int x, y, z;
+
+    tie(z, y, x) = t1;
+    
+    cout << x << endl;
+    cout << y << endl;
+    cout << z << endl;
+}
+```
+Notes:
+- Once again, you must make sure the types are matching
+    - This is because C++ is a strongly typed language!
+
+### Concatenating Tuples
+
+Concat: 
+- tuple_cat: Takes in 2 tuples, returns 1 longer one
+
+```cpp
+// C++ program to  iterated thorough
+// all values. I equals number
+// of values in tuple
+#include <iostream>
+#include <string>
+#include <tuple>
+ 
+using namespace std;
+
+
+int main() {
+    // declare these 2 tuples (normal)
+    tuple <int, char> t1(20, 'A');
+    tuple <char, string> t2('B', "Hello World!");
+    
+    // make sure to declare types of variables, even for the cat!
+    // if you do not declare, then use 'auto'
+    
+    // tuple <int, char, char, string> t3 = tuple_cat(t1, t2);
+    auto t3 = tuple_cat(t1, t2);
+    cout << get<0>(t3) << endl;
+    cout << get<1>(t3) << endl;
+    cout << get<2>(t3) << endl;
+    cout << get<3>(t3) << endl; 
+}
 
 
 ```
 
-### Decomposing Tuples
-
-
-### Concatenating Tuples
-
+Note: Auto allows the C++ compiler to figure out the data types for you!
+- saves a lot of code
+- Tim said that he does NOT like using auto
+    - says to be careful
+    - writing out types explicitly is good for appreciating what data you are working with
 
 ### Git
 
@@ -1900,6 +1974,184 @@ git push -u origin main
 git status
 git log --oneline
 q
+```
+
+
+## #17 - Tuples
+
+### Setup
+
+```sh
+cd tech_with_tim_series
+mkdir 17
+cd 17
+echo int main() {} > tutorial17.cpp
+```
+
+Then, add this in at the top of the .cpp file:
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+```
+
+### Intro
+
+...
+
+### What are Maps?
+
+Map: 
+
+What maps are good for:
+- order of elements do NOT matter
+- allows you to search for something in O(1) time
+    - (arrays use O(n) time)
+    - does not matter how large the map is, still will be more efficient
+
+### Creating maps
+
+```cpp
+#include <iostream>
+#include <string>
+#include <map>
+
+using namespace std;
+
+int main() {
+    map <char, int> mp = {
+        {'T', 7},
+        {'S', 8},
+        {'a', 4},
+    };
+
+    // inserting / accessing values
+    mp['u'] = 9;
+    //mp.insert(pair<char, int>('u', 9));
+    cout << mp['u'] << endl; // 9
+    cout << mp['c'] << endl; // 0 (it does not exist)
+
+    // using pairs
+    pair <char, int> p1('j', 5);
+    cout << p1.first << endl; // j
+    cout << p1.second << endl; // 5
+    
+
+    // check if it exists
+
+} 
+
+```
+
+```sh
+# compile
+g++ -o runProgram tutorial17.cpp
+runProgram
+```
+
+### Accessing Map Values / Inserting Map Pairs
+
+.erase()
+- delete 1 key with 
+    - delete it all with .clear()
+
+```cpp
+
+```
+
+### Erasing Map Pairs / Iterating Through Maps
+
+Iterators: Used to pass through an object
+- can use auto or declare the types
+
+```cpp
+#include <iostream>
+#include <string>
+#include <map>
+
+using namespace std;
+
+int main() {
+    map <char, int> mp = {
+        {'T', 7},
+        {'S', 8},
+        {'a', 4},
+    };
+    pair <char, int> p1('j', 5);
+    mp.insert(p1);
+
+    // iterate
+    auto myMap = mp;
+    for(const auto& elem : myMap) {
+    std::cout << elem.first << " " << elem.second << "\n";
+    }
+
+    // check if it is empty
+    cout << mp.empty() << endl; // 0
+    mp.clear();
+    cout << mp.empty() << endl; // 1
+
+    // another way to iterate, iterators are used to loop through the object
+    // - iterator has access to first object
+    mp = myMap;
+    for (auto itr = mp.begin(); itr != mp.end(); ++itr) { // ends when mp.end() is true
+        // you are given a pointer to each pair
+        // - to access elements, you must dereference it
+        //cout << itr << endl; gives error
+        cout << (*itr).first << endl;
+        cout << (*itr).second << endl;
+
+        cout << itr->first << endl;  // these do the same thing! (shorthand notation)
+        cout << itr->second << endl; // these do the same thing! (shorthand notation) 
+    }
+} 
+
+```
+
+### Practical Map Example
+
+Example: Count frequency of each letter
+
+```cpp
+#include <iostream>
+#include <string>
+#include <map>
+
+using namespace std;
+
+int main() {
+    string test = "Hello world my name is Myles! hahahahahahahahahahaaha";
+
+    map<char, int> freq;
+
+    //cout << "Size of map: " << freq.size() << endl;
+    //cout << "Length of the string 'test': " << test.length() << endl;
+
+    // Stores length of the string
+    int N = test.length();
+    for (int i = 0; i < N; ++i) {
+        char letter = test[i];
+        cout << "i=" << i << endl;
+        cout << "letter=" << test[i] << endl;
+        
+        // check if letter exists in the map...
+        if (freq.find(letter) == freq.end()) {
+            // no: make it 0
+            freq[letter] = 0;
+        }
+        // regardless, increment by 1!
+        freq[letter]++;
+    }
+
+    // iterate again and print results of final map
+    //cout << "Size of map: " << freq.size() << endl;
+    cout << "-----\niterating through finished map 'freq' ... \n-----\n";
+    for (auto itr = freq.begin(); itr != freq.end(); ++itr) {
+        cout << itr->first << ": " << itr->second << endl;
+    }
+} 
+
 ```
 
 
