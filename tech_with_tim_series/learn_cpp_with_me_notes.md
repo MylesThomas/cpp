@@ -2165,3 +2165,358 @@ git status
 git log --oneline
 q
 ```
+
+## #18 - Vectors
+
+### Setup
+
+```sh
+cd tech_with_tim_series
+mkdir 18
+cd 18
+echo int main() {} > tutorial18.cpp
+```
+
+Then, add this in at the top of the .cpp file:
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector> // new
+
+using namespace std;
+```
+
+### Intro
+
+### What are Vectors?
+
+Vectors: Dynamically re-sizeable array
+- Vector will increase size if you add 'too many' elements
+    - you do not need to declare size when starting
+
+- Basically the same as an array
+- Vectors can shrink to use less of CPU memory
+
+### Creating Vectors / Access Vector Elements
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    vector<int> v1 = {1,2,3,69};
+    cout << v1.front() << endl; // 1
+    cout << v1.back() << endl; // 69
+
+    cout << v1.size() << endl; // 4
+    
+} 
+```
+
+```sh
+g++ -o runProgram tutorial18.cpp
+runProgram
+```
+
+### Common Vector Methods and Capacity
+
+Capacity: # of elements it can hold
+- capacity doubles in size once the array's size hits it
+    - example: When size becomes 8 and capacity is 8, when you add the 9th value, capacity doubles to 16
+
+Size: # of elements it IS currently holding
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    vector<int> v1 = {1,2,3};
+    cout << v1.size() << endl; // 3
+    cout << v1.capacity() << endl; // 4
+
+    v1.push_back(4);
+    cout << v1.size() << endl; // 4
+    cout << v1.capacity() << endl; // 6
+
+    v1.push_back(5);
+    cout << v1.size() << endl; // 5
+    cout << v1.capacity() << endl; // 6
+ 
+    // pop from back
+    // - returns the last element AND removes it
+    // - note: capacity does not go back down, even if you pop all the values off
+    v1.pop_back();
+    v1.pop_back();
+    v1.pop_back();
+    v1.pop_back();
+    v1.pop_back(); // pop all 5 values off
+
+    cout << v1.size() << endl; // 0
+    cout << v1.capacity() << endl; // 6 (same as before)
+
+    // decrease capacity of vector with .shrink_to_fit()
+    // - do this when you don't need space anymore
+    v1.push_back(1);
+    v1.shrink_to_fit();
+    cout << v1.size() << endl; // 1
+    cout << v1.capacity() << endl; // 1 (smaller than before)
+
+    // insert and erase elements (not intuitive!)
+    // - insert
+    cout << "\nbeginning with v...\n" << endl;
+    vector<int> v = {1,2,3,4};
+
+    int x = 25;
+    v.insert(v.begin() + 1, x); // insert at position 1
+    cout << v[1] << endl; // 25
+
+    int y = 10000;
+    v.insert(v.begin() + 0, y); // insert at position 0
+    cout << v[0] << endl; // 10000
+
+    // - erase
+    v.erase(v.begin() + 0); // erase the element at position 0
+    cout << v[0] << endl; // 1 (the value that was there initially)
+    v.erase(v.begin() + 1); // erase the element at position 1
+    cout << v[1] << endl; // 2 (the value that was there initially)
+
+    // iterate through a vector
+    // - method 1
+    cout << "\nlooping/iterating..." << endl;
+
+    cout << "method 1:" << endl;
+
+    for (int i = 0; i < v.size(); ++i) {
+        cout << v[i] << endl;
+    }
+
+    cout << "method 2:" << endl;
+
+    v.insert(v.begin() + 0, 10); // place a 10 at position 0
+    for (auto itr = v.begin(); itr != v.end(); ++itr) {
+        cout << *itr << endl;
+    }
+} 
+
+```
+
+### Git
+
+```sh
+cd cpp
+git status
+git add .
+git commit -m "Completed Lesson 18 of Tech With's Tim C++ Series"
+git push -u origin main
+git status
+git log --oneline
+q
+```
+
+
+## #18 - Vectors
+
+### Setup
+
+```sh
+cd tech_with_tim_series
+mkdir 19
+cd 19
+echo int main() {} > tutorial19.cpp
+```
+
+Then, add this in at the top of the .cpp file:
+
+```cpp
+#include <iostream>
+#include <string>
+#include <set>
+
+using namespace std;
+```
+
+### Intro
+
+Set: Data structure that tells you if an element is present, or not
+
+### What are Sets?
+
+Set: Unordered collection of unique elements
+- does not use order
+- find element instantly (O(1))
+    - beyond this scope: sometimes it can get to O(n)
+- values are unique
+
+### Creating Sets / Iterating Through a Set
+
+```cpp
+#include <iostream>
+#include <string>
+#include <set>
+
+using namespace std;
+
+int main() {
+    set<char> s1 = { // order does NOT matter
+        'C',
+        'D',
+        'C', // if you insert an element that already exists, it does nothing at all!
+        'D',
+        'A'
+    };
+
+    for (auto itr = s1.begin(); itr != s1.end(); ++itr) {
+        cout << *itr << endl; // C, D, A (not always in that order..., i got A/C/D)
+    }
+} 
+
+```
+
+```sh
+g++ -o runProgram tutorial19.cpp
+runProgram
+```
+
+### Inserting and Erasing Elements / Set contains elements
+
+```cpp
+#include <iostream>
+#include <string>
+#include <set>
+
+using namespace std;
+
+bool checkSetForChar(set<char> s, char ch) {
+    if (s.find(ch) == s.end()) {
+        cout << "Could not find " << ch << " in the set..." << endl;
+    } else {
+        cout << "Found " << ch << " !!" << endl;
+    }
+}
+
+void printValuesOfSet(set<char> s) {
+    if (s.size() == 0) {
+        cout << "This set is empty. Returning." << endl;
+        return; // use return to exit out of a function
+    }
+    cout << "Printing all values from the set..." << endl;
+    for (auto itr = s.begin(); itr != s.end(); ++itr) {
+        cout << *itr << endl; 
+    }
+}
+
+int main() {
+    // insert
+    set<char> s1 = {};
+    char myChar = 'Z';
+    s1.insert(myChar);
+    checkSetForChar(s1, myChar);
+    printValuesOfSet(s1);
+
+    // delete
+    s1.erase('Z');
+    checkSetForChar(s1, myChar);
+    printValuesOfSet(s1); 
+} 
+
+```
+
+Note: We added duplicate elements, just to see what would happen. (Nothing happens!)
+
+### Practical Set Example
+
+#1: 
+
+```cpp
+#include <iostream>
+#include <string>
+#include <set>
+
+using namespace std;
+
+int main() {
+    string test = "This is a test zzzaaaksdfjfjdkddkiokjdfkj";
+    set<char> exists;
+
+    for (int i = 0; i < test.length(); ++i) {
+        // insert every element from string into the set... (if it doesn't exist already)
+        // note: this check is unnecessary, i just did it to help better know what is going on.
+        char letter = test[i];
+        if (exists.find(letter) == exists.end()) {
+            cout << "Inserting '" << letter << "' into the set."; 
+            exists.insert(letter);
+            
+        } else {
+            cout << "That letter '" << letter << "' already exists in the set. Keep going on." << endl;
+        }
+    }
+
+    for (auto itr = exists.begin(); itr != exists.end(); ++itr) {
+        cout << *itr << endl;
+    }
+} 
+
+```
+
+#2: 
+
+```cpp
+#include <iostream>
+#include <string>
+#include <set>
+
+using namespace std;
+
+int main() {
+    string test = "This is a test zzzaaaksdfjfjdkddkiokjdfkj";
+    string find = "hello";
+    set<char> findLetters; // init empty set
+
+    // iterate through the short string 'find' and add letters to the set.
+    for (int i = 0; i < find.length(); ++i) {
+        char letter = find[i];
+        findLetters.insert(letter);
+    }
+
+    // iterate through the long string 'test' and delete letters to the set. (so that we end with a set of length==0)
+    for (int i = 0; i < test.length(); ++i) {
+        char letter = test[i];
+        findLetters.erase(letter);
+    }
+
+    // confirm there are 0 letters remaining in 'findLetters'
+    if (findLetters.size() >= 1) {
+        cout << "NO! It does not have all of the letters." << endl;
+        cout << "printing the letters remaining in the set..." << endl;
+
+        for (auto itr = findLetters.begin(); itr != findLetters.end(); ++itr) {
+            cout << *itr << endl;
+        }
+
+    } else {
+        cout << "YES! It does!" << endl;
+    }
+} 
+
+```
+
+### Git
+
+```sh
+cd cpp
+git status
+git add .
+git commit -m "Completed Lesson 19 of Tech With's Tim C++ Series"
+git push -u origin main
+git status
+git log --oneline
+q
+```
