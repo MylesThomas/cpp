@@ -2151,7 +2151,17 @@ int main() {
         cout << itr->first << ": " << itr->second << endl;
     }
 } 
-
 ```
 
+### Git
 
+```sh
+cd cpp
+git status
+git add .
+git commit -m "Completed Lesson 17 of Tech With's Tim C++ Series"
+git push -u origin main
+git status
+git log --oneline
+q
+```
