@@ -2322,7 +2322,7 @@ q
 ```
 
 
-## #18 - Vectors
+## #19 - Sets
 
 ### Setup
 
@@ -2515,6 +2515,269 @@ cd cpp
 git status
 git add .
 git commit -m "Completed Lesson 19 of Tech With's Tim C++ Series"
+git push -u origin main
+git status
+git log --oneline
+q
+```
+
+
+## #20 - Functions
+
+### Setup
+
+```sh
+cd tech_with_tim_series
+mkdir 20
+cd 20
+echo int main() {} > tutorial20.cpp
+```
+
+Then, add this in at the top of the .cpp file:
+
+```cpp
+#include <iostream>
+#include <string>
+#include <set>
+
+using namespace std;
+```
+
+### Intro
+
+Int main: A special function
+- driver code
+
+### What are Functions?
+
+Functions: Group of statements that perform a task
+- re-usable block that we will use more than 1 time
+- declaration: tells compiler about a function's following attributes:
+    - name
+    - return type
+    - input params
+
+### Creating Functions / Functions Without Parameters / Void Functions
+
+```cpp
+#include <iostream>
+#include <string>
+#include <set>
+
+using namespace std;
+
+// This function MUST return an int
+int add(int x, int y) { 
+    return x + y;
+}
+
+int functionWithNoInputParameters() {
+    cout << "This function takes no input params." << endl;
+    return 7;
+    // return 69 (this does not get called)
+}
+
+void functionThatReturnsNothing() {
+    cout << "Function has been called. No return value..." << endl;
+    for (int i = 0; i < 25; ++i) {
+        cout << i << " ";
+    }
+}
+
+int main() {
+    // basic example
+    int result = add(2, 3);
+    cout << result << endl;
+
+    // re-using a function with no params
+    cout << functionWithNoInputParameters() << endl;
+    cout << functionWithNoInputParameters() << endl;
+    cout << functionWithNoInputParameters() << endl;
+    
+    // void
+    functionThatReturnsNothing();
+    functionThatReturnsNothing();
+    functionThatReturnsNothing();
+    
+} 
+
+```
+
+```sh
+g++ -o runProgram tutorial20.cpp
+runProgram
+```
+
+### Function Examples
+
+```cpp
+#include <iostream>
+#include <string>
+#include <set>
+
+using namespace std;
+
+// helper function
+void print(string text) {
+    cout << text << endl;
+}
+
+// general function
+// - note: notice how it describes what it does
+// - note: we are using a function INSIDE of a function
+//      - makes it easier to read the code
+void printNTimes(int n, string text) {
+    cout << "Calling function printNTimes..." << endl;
+    for (int i = 0; i < n; ++i) {
+        print(text);
+    }
+}
+
+int main() {
+    printNTimes(5, "Tim");
+    printNTimes(7, "is great!");  
+} 
+
+```
+
+### Default Parameters / Weird Function Return Types
+
+```cpp
+#include <iostream>
+#include <string>
+#include <set>
+
+using namespace std;
+
+// param z: default parameter
+//  - you do not need to pass anything in, and you can still pass use the function!
+int doMath(int x, int y, int z = 5) { // assumption: z is 1
+    return (x + y) * z;
+}
+
+pair<int, int> makePair (int x, int y) {
+    return pair<int, int> (x, y);
+}
+
+int main() {
+    //cout << doMath() << endl;  (would error out)
+    //cout << doMath(3) << endl; (would error out)
+    cout << doMath(3, 4) << endl; // works (using optional param)
+    cout << doMath(3, 4, 100) << endl; // works
+
+    // weird function return types 
+    cout << makePair(2, 3).first << endl; // 2
+    cout << makePair(2, 3).second << endl;// 3
+    
+} 
+
+```
+
+### Pass By Reference
+
+```cpp
+#include <iostream>
+#include <string>
+#include <set>
+
+using namespace std;
+
+void printInt(int x) {
+    cout << x << endl;
+}
+
+void swapFail(int x, int y) {
+    x = y;
+    y = x;
+}
+
+void swapWithRef(int &x, int &y) {
+    int temp = x;
+    x = y;
+    y = temp;
+}
+
+int main() {
+    // init a and b
+    int a = 1;
+    int b = 2;
+    // print a and b
+    printInt(a); // 1
+    printInt(b); // 2
+    
+    // swap a and b
+    swapFail(a, b);
+    // print a and b (with same values - we did not use pointers or references)
+    printInt(a); // 1
+    printInt(b); // 2
+
+    // CHANGE VALUES OF A AND B
+    // swap a and b (repeat)
+    swapWithRef(a, b);
+    // print a and b (swap worked!)
+    printInt(a); // 2
+    printInt(b); // 1   
+} 
+
+```
+
+Note: When you pass an int (or any primitive data type) as an argument, x becomes a copy of the argument
+- it is not actually the value, it is a copy made in the stack
+    - if you want to modify the actual value, you must pass the references
+        - "I want the reference to int a and int b"
+
+Notes:
+- primitive data type: the most basic data types available within the Java language.
+    - There are 8: boolean , byte , char , short , int , long , float and double
+
+- Many functions take references as arguments!
+
+### Pass By Pointers
+
+```cpp
+#include <iostream>
+#include <string>
+#include <set>
+
+using namespace std;
+
+void printInt(int x) {
+    cout << x << endl;
+}
+
+void swap(int *x, int *y) {
+    int temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
+
+
+int main() {
+    int a = 2;
+    int b = 4;
+
+    printInt(a);
+    printInt(b);
+
+    cout << "Swapping ... " << endl;
+    swap(&a, &b);
+    printInt(a);
+    printInt(b);
+} 
+
+```
+
+Note: Make sure to de-reference the pointers in the function, or else it will not work
+- References make a lot more sense in functions
+
+### Git
+
+```sh
+cd cpp
+git status
+git add .
+git commit -m "Completed Lesson 20 of Tech With's Tim C++ Series"
 git push -u origin main
 git status
 git log --oneline
